@@ -1,123 +1,175 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>مرحبا بك</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>موقع غسان</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
 
-  body {
-    background: #0b2545; /* أزرق غامق */
-    color: white;
-    font-family: 'Cairo', sans-serif;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+    body {
+      margin: 0;
+      background-color: #0a2540; /* أزرق غامق */
+      font-family: 'Cairo', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding: 30px 20px;
+      text-align: center;
+    }
 
-  h1 {
-    font-size: 3.5rem;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
-    margin-bottom: 40px;
-  }
+    h1 {
+      color: red;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
 
-  button {
-    background: linear-gradient(45deg, #1e3c72, #2a5298);
-    border: none;
-    padding: 15px 50px;
-    color: white;
-    font-size: 1.5rem;
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
+    .light-blue {
+      color: #d9e8f9; /* أزرق فاتح قريب للأبيض */
+      font-size: 1.6rem;
+      margin-bottom: 25px;
+    }
 
-  button:hover {
-    background: linear-gradient(45deg, #2a5298, #1e3c72);
-    transform: scale(1.05);
-  }
+    .desc {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+    }
 
-  /* صندوق الترحيب - مودال */
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.7);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-  }
+    .like-button {
+      font-size: 2.5rem;
+      cursor: pointer;
+      color: white;
+      transition: color 0.3s ease;
+      user-select: none;
+      margin-bottom: 30px;
+    }
 
-  .modal-content {
-    background: #112f57;
-    padding: 30px 50px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #1e3c72;
-    font-size: 1.8rem;
-    color: white;
-    max-width: 90%;
-    text-align: center;
-  }
+    .like-button.liked {
+      color: red;
+    }
 
-  .close-btn {
-    margin-top: 20px;
-    background: #e94560;
-    border: none;
-    padding: 10px 30px;
-    color: white;
-    font-size: 1.3rem;
-    border-radius: 20px;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-    transition: background 0.3s ease;
-  }
+    button {
+      background-color: #154e9f;
+      border: none;
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
 
-  .close-btn:hover {
-    background: #bf3645;
-  }
-</style>
+    button:hover {
+      background-color: #103e7d;
+    }
+
+    #comment-section {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 10px;
+    }
+
+    #comment-input {
+      width: 100%;
+      padding: 12px 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    #comment-list {
+      list-style: none;
+      padding: 0;
+      max-height: 180px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #142d4c;
+    }
+
+    #comment-list li {
+      background: #1e3b6a;
+      margin: 8px 12px;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-size: 1rem;
+      word-wrap: break-word;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-<h1>مرحباً بك في موقعنا</h1>
-<button id="startBtn">ابدأ</button>
+  <h1>أنا اسمي غسان</h1>
+  <div class="light-blue">مولود ٢٠١٤</div>
+  <div class="desc">أنا مبرمج لينكس، هذا موقع تعبت عليه</div>
 
-<div class="modal" id="welcomeModal">
-  <div class="modal-content">
-    <p>مرحباً في موقع شكراً لك للدخول موقعنا</p>
-    <button class="close-btn" id="closeModal">إغلاق</button>
+  <div id="like" class="like-button" title="إعجاب">♥</div>
+
+  <button id="show-comment-btn">اضغط للكتابة تعليقك</button>
+
+  <div id="comment-section" style="display:none;">
+    <input type="text" id="comment-input" placeholder="اكتب تعليقك هنا..." maxlength="200" />
+    <button id="submit-comment">إرسال التعليق</button>
   </div>
-</div>
 
-<script>
-  const startBtn = document.getElementById('startBtn');
-  const modal = document.getElementById('welcomeModal');
-  const closeModal = document.getElementById('closeModal');
+  <ul id="comment-list"></ul>
 
-  startBtn.addEventListener('click', () => {
-    modal.style.display = 'flex';
-  });
+  <script>
+    const likeBtn = document.getElementById('like');
+    let liked = false;
 
-  closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+    likeBtn.addEventListener('click', () => {
+      liked = !liked;
+      if (liked) {
+        likeBtn.classList.add('liked');
+      } else {
+        likeBtn.classList.remove('liked');
+      }
+    });
 
-  // اغلاق المودال لو ضغط المستخدم خارج الصندوق
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-</script>
+    const showCommentBtn = document.getElementById('show-comment-btn');
+    const commentSection = document.getElementById('comment-section');
+    const commentInput = document.getElementById('comment-input');
+    const submitCommentBtn = document.getElementById('submit-comment');
+    const commentList = document.getElementById('comment-list');
+
+    showCommentBtn.addEventListener('click', () => {
+      if (commentSection.style.display === 'none') {
+        commentSection.style.display = 'block';
+        commentInput.focus();
+      } else {
+        commentSection.style.display = 'none';
+      }
+    });
+
+    submitCommentBtn.addEventListener('click', () => {
+      const text = commentInput.value.trim();
+      if (text.length === 0) {
+        alert('الرجاء كتابة تعليق قبل الإرسال');
+        return;
+      }
+      const li = document.createElement('li');
+      li.textContent = text;
+      commentList.appendChild(li);
+      commentInput.value = '';
+      commentSection.style.display = 'none';
+    });
+
+    // Optional: Allow Enter key to submit comment
+    commentInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        submitCommentBtn.click();
+      }
+    });
+  </script>
 
 </body>
 </html>
